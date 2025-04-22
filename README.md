@@ -1,22 +1,53 @@
 # Restoran Nasi Goreng Website
 
-Website untuk Restoran Nasi Goreng, menampilkan menu, informasi, dan kontak.
+A modern React-based website for Restoran Nasi Goreng, showcasing menus, information, and contact details. Built with TypeScript, Vite, and Tailwind CSS.
 
-## Petunjuk Update Sitemap.xml Secara Otomatis
+## Features
 
-Untuk memastikan sitemap.xml selalu diperbarui dengan otomatis, ikuti langkah-langkah berikut:
+- 🏠 Responsive landing page with hero section, featured menu, about section, and testimonials
+- 🍽️ Complete menu catalog with detailed item pages
+- 📱 Mobile-friendly design
+- 🔍 SEO optimized with meta tags and sitemap
+- 🖼️ Optimized image loading
+- 🛍️ Integration with food delivery platforms (GoFood, ShopeeFood)
+- 💬 WhatsApp integration for direct orders
+- 📍 Contact form and location information
+- 🎨 Modern UI components with Tailwind CSS
+- 🌐 Automatic sitemap generation
+
+## Project Structure
+
+```
+src/
+├── assets/
+├── components/
+│   ├── About/
+│   ├── Contact/
+│   ├── Home/
+│   ├── Layout/
+│   ├── Menu/
+│   └── UI/
+├── data/
+├── logo/
+├── pages/
+└── types/
+```
+
+## Automatic Sitemap Generation
+
+The project includes automated sitemap generation to improve SEO. Here's how to set it up:
 
 ### 1. Install sitemap-generator
 
-Tambahkan package sitemap-generator pada proyek:
+Add the sitemap-generator package to your project:
 
 ```bash
 npm install --save-dev sitemap-generator-cli
 ```
 
-### 2. Tambahkan script di package.json
+### 2. Add script to package.json
 
-Tambahkan script berikut di bagian "scripts" pada file package.json:
+Add the following script to your package.json:
 
 ```json
 "scripts": {
@@ -24,9 +55,9 @@ Tambahkan script berikut di bagian "scripts" pada file package.json:
 }
 ```
 
-### 3. Buat file konfigurasi sitemap
+### 3. Create sitemap configuration
 
-Buat file bernama `sitemap-config.js` di root proyek dengan isi sebagai berikut:
+Create a `sitemap-config.js` file in the project root:
 
 ```javascript
 module.exports = {
@@ -61,9 +92,9 @@ module.exports = {
 };
 ```
 
-### 4. Perbarui dengan GitHub Actions (Opsional)
+### 4. GitHub Actions Integration (Optional)
 
-Untuk update otomatis menggunakan GitHub Actions, buat file `.github/workflows/sitemap.yml`:
+For automatic updates using GitHub Actions, create `.github/workflows/sitemap.yml`:
 
 ```yaml
 name: Generate Sitemap
@@ -72,7 +103,7 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: "0 0 * * 0" # Setiap minggu pada hari Minggu jam 00:00 UTC
+    - cron: "0 0 * * 0" # Every Sunday at 00:00 UTC
 
 jobs:
   build:
@@ -98,9 +129,9 @@ jobs:
           file_pattern: public/sitemap.xml
 ```
 
-### 5. Tambahkan pada Proses Build
+### 5. Add to Build Process
 
-Tambahkan perintah generate sitemap sebagai bagian dari proses build di package.json:
+Include sitemap generation in your build process:
 
 ```json
 "scripts": {
@@ -108,4 +139,19 @@ Tambahkan perintah generate sitemap sebagai bagian dari proses build di package.
 }
 ```
 
-Dengan mengikuti langkah-langkah di atas, sitemap.xml akan otomatis diperbarui dengan tanggal terbaru setiap kali website di-build atau sesuai jadwal yang diatur di GitHub Actions.
+## Getting Started
+
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Start development server: `npm run dev`
+4. Build for production: `npm run build`
+
+## Tech Stack
+
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- React Router
+- ESLint
+- PostCSS
