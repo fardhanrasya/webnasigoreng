@@ -1,149 +1,153 @@
-# Restoran Nasi Goreng - Website Next.js
+# 🍽️ Restoran Nasi Goreng - Website
 
-Website yang dibuat menggunakan Next.js untuk Restoran Nasi Goreng, sebuah restoran Indonesia yang menampilkan berbagai jenis nasi goreng dan hidangan Indonesia lainnya.
+![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-blue?style=for-the-badge&logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=for-the-badge&logo=tailwind-css)
 
-## Struktur Proyek
+Website modern untuk Restoran Nasi Goreng Indonesia yang menampilkan berbagai hidangan nasi goreng otentik dan menu Indonesia lainnya.
 
-Proyek ini dibangun menggunakan:
+## ✨ Fitur Utama
 
-- Next.js 14 (App Router)
-- TypeScript
-- Tailwind CSS
+- 🚀 Performa tinggi dengan Next.js 14 (App Router)
+- 📱 Responsif untuk semua ukuran perangkat
+- 🎨 Desain modern dengan Tailwind CSS
+- 🔍 SEO-friendly dengan sitemap otomatis
+- 🖼️ Optimisasi gambar otomatis
+- 📊 Data terstruktur untuk manajemen konten
+- 💬 Integrasi WhatsApp untuk pemesanan dan pertanyaan
 
-## Penggunaan Data
+## 📋 Pengelolaan Data
 
-### Struktur Data
+### 📁 Struktur Data
 
 Semua data terstruktur tersimpan di folder `src/data` dalam format TypeScript:
 
-1. **menuData.ts**: Berisi data menu makanan dan minuman
-2. **chefData.ts**: Berisi data chef restoran
-3. **testimonialData.ts**: Berisi data testimonial pelanggan
-4. **restaurantData.ts**: Berisi informasi umum tentang restoran
+| File                 | Deskripsi                       |
+| -------------------- | ------------------------------- |
+| `menuData.ts`        | Data menu makanan dan minuman   |
+| `homePageData.ts`    | Konten halaman utama            |
+| `aboutPageData.ts`   | Konten halaman tentang kami     |
+| `contactPageData.ts` | Konten halaman kontak           |
+| `menuPageData.ts`    | Konten halaman menu             |
+| `testimonialData.ts` | Data testimonial pelanggan      |
+| `restaurantData.ts`  | Informasi umum tentang restoran |
+| `imageUrls.ts`       | Path gambar terstruktur         |
+| `iconsData.ts`       | Data icon untuk website         |
 
-### Cara Mengisi Data
-
-#### Menu (menuData.ts)
-
-Format data menu:
-
-```typescript
-{
-  id: number; // ID unik untuk menu
-  name: string; // Nama menu
-  description: string; // Deskripsi menu
-  price: number; // Harga menu (dalam format angka)
-  category: string; // Kategori menu ("Nasi Goreng", "Hidangan Pembuka", "Menu Utama", "Dessert", "Minuman")
-  image: string; // Path gambar relatif terhadap folder public (format: /images/menu/nama-file.jpg)
-  spicyLevel: number; // Level kepedasan (0-5, 0 = tidak pedas)
-  featured: boolean; // Apakah ditampilkan di halaman utama (true/false)
-}
-```
-
-#### Chef (chefData.ts)
-
-Format data chef:
+### 🍜 Struktur Data Menu (`menuData.ts`)
 
 ```typescript
 {
-  id: number; // ID unik untuk chef
-  name: string; // Nama lengkap chef
-  title: string; // Jabatan chef
-  bio: string; // Biografi singkat chef
-  image: string; // Path gambar relatif terhadap folder public (format: /images/chef/nama-file.jpg)
-  specialty: string; // Spesialisasi chef
-  featured: boolean; // Apakah ditampilkan di halaman utama (true/false)
+  id: number;           // ID unik untuk menu
+  name: string;         // Nama menu
+  shortDescription: string; // Deskripsi singkat untuk card
+  description: string;  // Deskripsi lengkap menu
+  price: number;        // Harga menu (dalam satuan dolar yang dikonversi ke rupiah)
+  categories: string[]; // Kategori menu (array)
+  image: string;        // Path gambar
+  spicyLevel: number;   // Level kepedasan (0-3)
+  featured: boolean;    // Tampil di halaman utama
 }
 ```
 
-#### Testimonial (testimonialData.ts)
+## 📸 Panduan Gambar
 
-Format data testimonial:
+### 📷 Rekomendasi Ukuran Gambar
 
-```typescript
-{
-  id: number; // ID unik untuk testimonial
-  name: string; // Nama pemberi testimonial
-  occupation: string; // Pekerjaan pemberi testimonial
-  comment: string; // Teks testimonial
-  rating: number; // Rating (1-5)
-  image: string; // Path gambar relatif terhadap folder public (format: /images/testimonials/nama-file.jpg)
-  date: string; // Tanggal testimonial (format: YYYY-MM-DD)
-}
+#### Gambar Menu
+
+| Tampilan    | Ukuran Optimal    | Rasio | Format   | Keterangan                           |
+| ----------- | ----------------- | ----- | -------- | ------------------------------------ |
+| Menu Utama  | 800 × 600px       | 4:3   | JPG/WebP | Kualitas 75-80%                      |
+| Daftar Menu | Min. 640 × 480px  | 4:3   | JPG/WebP | Dioptimalkan untuk area tinggi 192px |
+| Hero Image  | 1200-1920px lebar | 16:9  | JPG/WebP | Untuk background header detail menu  |
+
+#### Tips Kualitas Foto Menu
+
+- Gunakan format WebP untuk performa terbaik (JPG sebagai fallback)
+- Ukuran file maksimal 300KB untuk performa optimal
+- Gunakan mode warna sRGB untuk konsistensi warna di berbagai perangkat
+- Pastikan foto memiliki:
+  - Pencahayaan yang baik dan konsisten
+  - Latar belakang yang tidak terlalu ramai
+  - Fokus yang tajam pada makanan
+  - Sudut pengambilan yang menampilkan tekstur dan detail makanan
+
+#### Gambar Lainnya
+
+| Jenis              | Ukuran Rekomendasi | Rasio | Format           |
+| ------------------ | ------------------ | ----- | ---------------- |
+| Chef/Team          | 500 × 500px        | 1:1   | JPG/WebP         |
+| Testimonial        | 300 × 300px        | 1:1   | JPG/WebP         |
+| Logo               | 200 × 200px        | 1:1   | PNG (transparan) |
+| Interior/Eksterior | 1200 × 800px       | 3:2   | JPG/WebP         |
+
+### 📁 Struktur Folder Gambar
+
+```
+public/images/
+├── menu/           # Gambar menu (nama-menu.jpg/webp)
+├── team/           # Gambar tim restoran (chef/staff)
+├── testimonials/   # Gambar testimonial (testimonial-1.jpg)
+├── restaurant/     # Gambar restoran (interior.jpg, exterior.jpg)
+└── logos/          # Logo dan icon (logo.png, whatsapp-logo.svg)
 ```
 
-### Struktur Gambar
+## 🚀 Menjalankan Website
 
-Semua gambar disimpan di dalam folder `public/images` dengan subfolders berikut:
+```bash
+# Install dependencies
+npm install
 
-1. **menu/**: Untuk gambar menu makanan dan minuman
+# Jalankan server development
+npm run dev
 
-   - Format penamaan: `nama-menu.jpg` (gunakan huruf kecil dan ganti spasi dengan tanda hubung)
-   - Contoh: `nasi-goreng-seafood.jpg`, `es-teh-manis.jpg`
-   - Ukuran yang direkomendasikan: 800x600 pixel
+# Buka http://localhost:3000 di browser
+```
 
-2. **chef/**: Untuk gambar para chef
+## 🏗️ Build untuk Production
 
-   - Format penamaan: `chef-nama.jpg` (gunakan huruf kecil dan ganti spasi dengan tanda hubung)
-   - Contoh: `chef-juna.jpg`, `chef-renatta.jpg`
-   - Ukuran yang direkomendasikan: 500x500 pixel (kotak)
+```bash
+# Build website
+npm run build
 
-3. **testimonials/**: Untuk gambar pemberi testimonial
+# Jalankan versi production
+npm start
+```
 
-   - Format penamaan: `testimonial-1.jpg`, `testimonial-2.jpg`, dst.
-   - Ukuran yang direkomendasikan: 300x300 pixel (kotak)
-
-4. **restaurant/**: Untuk gambar restoran
-   - Termasuk: `logo.png`, `storefront.jpg`, `interior-1.jpg`, `interior-2.jpg`, dll.
-   - Ukuran yang direkomendasikan untuk logo: 200x200 pixel (transparan)
-   - Ukuran yang direkomendasikan untuk foto: 1200x800 pixel
-
-## Menjalankan Website
-
-1. Install dependencies:
-
-   ```
-   npm install
-   ```
-
-2. Jalankan server development:
-
-   ```
-   npm run dev
-   ```
-
-3. Buka [http://localhost:3000](http://localhost:3000) di browser Anda.
-
-## Membangun Website untuk Production
-
-1. Build website:
-
-   ```
-   npm run build
-   ```
-
-2. Jalankan versi production:
-   ```
-   npm start
-   ```
-
-## Struktur Folder
+## 📂 Struktur Folder
 
 ```
 project/
-├── public/
-│   ├── images/
-│   │   ├── menu/        # Gambar menu
-│   │   ├── chef/        # Gambar chef
-│   │   ├── testimonials/ # Gambar testimonial
-│   │   └── restaurant/  # Gambar restoran
-│   └── robots.txt
+├── public/            # Aset statis (gambar, font, dll)
 ├── src/
-│   ├── app/            # Next.js app directory
-│   ├── components/     # Komponen React
-│   ├── data/           # Data statis aplikasi
-│   └── types/          # TypeScript type definitions
-├── next.config.js
-├── package.json
-└── tailwind.config.js
+│   ├── app/           # Routing Next.js dan layout page
+│   ├── components/    # Komponen React terstruktur
+│   │   ├── Home/      # Komponen khusus halaman Home
+│   │   ├── Menu/      # Komponen terkait menu
+│   │   ├── About/     # Komponen halaman About
+│   │   ├── Contact/   # Komponen halaman Contact
+│   │   ├── Layout/    # Komponen layout (Header, Footer)
+│   │   └── UI/        # Komponen UI reusable
+│   ├── data/          # Data statis (menu, dll)
+│   └── types/         # TypeScript type definitions
+├── next.config.js     # Konfigurasi Next.js
+├── tailwind.config.js # Konfigurasi Tailwind CSS
+├── generate-sitemap.js # Script generator sitemap
+├── sitemap-config.js  # Konfigurasi sitemap
+└── package.json       # Dependencies dan script
 ```
+
+## 💻 Pengembangan
+
+Website ini dioptimalkan untuk:
+
+- Kecepatan loading yang cepat
+- Aksesibilitas
+- SEO
+- Pengalaman pengguna yang intuitif
+- Responsif di semua perangkat
+
+---
+
+&copy; 2024 Restoran Nasi Goreng. Dibuat dengan ❤️ menggunakan Next.js

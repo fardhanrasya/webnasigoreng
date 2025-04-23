@@ -37,11 +37,13 @@ export async function generateMetadata({
 
   return {
     title: `${menuItem.name} - Detail Menu`,
-    description: menuItem.description,
-    keywords: `${menuItem.name}, ${menuItem.category}, menu makanan indonesia`,
+    description: menuItem.shortDescription,
+    keywords: `${menuItem.name}, ${menuItem.categories.join(
+      ", "
+    )}, menu makanan indonesia`,
     openGraph: {
       title: `${menuItem.name} - Detail Menu | Restoran Nasi Goreng`,
-      description: menuItem.description,
+      description: menuItem.shortDescription,
       type: "website",
       images: [
         {

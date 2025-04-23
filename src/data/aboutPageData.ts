@@ -23,33 +23,33 @@ export const aboutPageData = {
     },
   },
   story: {
-    title: "From Humble Beginnings",
+    title: "Dari Awal yang Sederhana",
     paragraphs: [
-      "Our journey began in 1995 when Chef Wijaya, inspired by his grandmother's recipes, opened a small food stall in Jakarta. His signature Nasi Goreng quickly gained popularity, drawing crowds from across the city.",
-      "As word spread about the exceptional flavors and quality of our food, we expanded to our first restaurant in 1998. Since then, we've grown while maintaining our commitment to authentic Indonesian cuisine and the traditional cooking methods that make our dishes special.",
-      "Today, NasiGoreng Restaurant stands as a culinary landmark, beloved by locals and tourists alike. We take pride in preserving our cultural heritage through food while innovating to create new and exciting flavors that honor the rich culinary traditions of Indonesia.",
+      "Perjalanan kami dimulai pada tahun 1995 ketika Chef Wijaya, terinspirasi oleh resep neneknya, membuka warung kecil di Jakarta. Nasi Goreng andalannya cepat populer, menarik banyak pengunjung dari seluruh kota.",
+      "Seiring kabar tentang kelezatan dan kualitas makanan kami menyebar, kami berkembang dan membuka restoran pertama pada tahun 1998. Sejak itu, kami terus tumbuh sambil tetap berkomitmen pada masakan Indonesia yang autentik dan metode memasak tradisional yang membuat hidangan kami istimewa.",
+      "Sekarang, Restoran NasiGoreng berdiri sebagai landmark kuliner yang dicintai warga lokal dan turis. Kami bangga melestarikan warisan budaya melalui makanan sambil berinovasi menciptakan cita rasa baru yang menghormati tradisi kuliner Indonesia yang kaya.",
     ],
   },
   values: {
-    title: "Our Values",
+    title: "Nilai-Nilai Kami",
     items: [
       {
         icon: "star",
-        title: "Quality",
+        title: "Kualitas",
         description:
-          "We use only the freshest ingredients and authentic spices to create dishes that honor Indonesian culinary traditions.",
+          "Kami hanya menggunakan bahan-bahan segar dan rempah asli untuk menciptakan hidangan yang menghormati tradisi kuliner Indonesia.",
       },
       {
         icon: "community",
-        title: "Community",
+        title: "Komunitas",
         description:
-          "We believe in creating a warm, welcoming space where people can connect and share memorable experiences through food.",
+          "Kami percaya dalam menciptakan ruang yang hangat dan ramah di mana orang bisa berkumpul dan berbagi pengalaman berkesan melalui makanan.",
       },
       {
         icon: "sustainability",
-        title: "Sustainability",
+        title: "Keberlanjutan",
         description:
-          "We're committed to sustainable practices, sourcing locally when possible, and minimizing our environmental impact.",
+          "Kami berkomitmen pada praktik berkelanjutan, menggunakan bahan lokal bila memungkinkan, dan meminimalkan dampak lingkungan.",
       },
     ],
   },
@@ -58,5 +58,39 @@ export const aboutPageData = {
     title: "Tentang Kami",
     subtitle:
       "Mengenal lebih dekat perjalanan dan filosofi Restoran Nasi Goreng",
+  },
+  team: {
+    title: "Kenali Tim Kami",
+    subtitle: "Orang-orang berbakat di balik kreasi lezat kami",
+    members: [
+      {
+        id: 1,
+        name: "Chef Wijaya",
+        position: "Pendiri & Kepala Chef",
+        bio: "Dengan pengalaman kuliner lebih dari 30 tahun, Chef Wijaya menghadirkan cita rasa Indonesia yang autentik dalam setiap hidangan yang dia ciptakan.",
+        image: imageUrls.team["chef-1"],
+      },
+      {
+        id: 2,
+        name: "Siti Rahayu",
+        position: "Chef Eksekutif",
+        bio: "Terlatih dalam teknik memasak tradisional dan modern, Siti ahli dalam menciptakan inovasi baru dari hidangan Indonesia klasik.",
+        image: imageUrls.team["chef-2"],
+      },
+      {
+        id: 3,
+        name: "Budi Santoso",
+        position: "Manajer Restoran",
+        bio: "Budi memastikan setiap tamu menikmati pengalaman bersantap yang luar biasa sejak mereka melangkah masuk ke restoran kami.",
+        image: imageUrls.team["chef-3"],
+      },
+      {
+        id: 4,
+        name: "Putri Anggraini",
+        position: "Chef Pastry",
+        bio: "Putri menggabungkan teknik Indonesia dan Eropa untuk menciptakan dessert unik yang sempurna melengkapi hidangan utama kami.",
+        image: imageUrls.team["staff-1"],
+      },
+    ],
   },
 };

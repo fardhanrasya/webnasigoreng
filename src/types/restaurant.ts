@@ -8,14 +8,10 @@ export interface RestaurantType {
     weekdays: {
       days: string;
       hours: string;
-      englishDays: string;
-      englishHours: string;
     };
     weekend: {
       days: string;
       hours: string;
-      englishDays: string;
-      englishHours: string;
     };
   };
   established: number;

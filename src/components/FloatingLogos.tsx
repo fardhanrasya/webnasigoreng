@@ -127,8 +127,9 @@ const FloatingLogos: React.FC<FloatingLogosProps> = ({
               <OptimizedImage
                 src="/images/logos/gofood.svg"
                 alt="GoFood"
-                width={112}
-                height={48}
+                width={140}
+                height={50}
+                objectFit="contain"
               />
             </div>
 
@@ -141,8 +142,9 @@ const FloatingLogos: React.FC<FloatingLogosProps> = ({
               <OptimizedImage
                 src="/images/logos/shopeefood.svg"
                 alt="ShopeeFood"
-                width={112}
-                height={48}
+                width={140}
+                height={50}
+                objectFit="contain"
               />
             </div>
           </div>

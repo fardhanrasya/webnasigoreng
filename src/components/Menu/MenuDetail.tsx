@@ -22,7 +22,7 @@ const MenuDetail: React.FC<MenuDetailProps> = ({ menuItem }) => {
   const handleShareWhatsApp = () => {
     const currentUrl = window.location.href;
     const message = `Lihat menu lezat ini: ${menuItem.name} - ${
-      menuItem.description
+      menuItem.shortDescription
     }. Harga: Rp${(menuItem.price * 15000).toLocaleString(
       "id-ID"
     )}. Kunjungi: ${currentUrl}
@@ -41,8 +41,15 @@ const MenuDetail: React.FC<MenuDetailProps> = ({ menuItem }) => {
         <div className="absolute inset-0 bg-black bg-opacity-40 flex items-end">
           <Container className="pb-8">
             <h1 className="text-4xl font-bold text-white">{menuItem.name}</h1>
-            <div className="inline-block bg-orange-500 text-white text-sm px-3 py-1 mt-2 rounded-full">
-              {menuItem.category}
+            <div className="flex flex-wrap gap-2 mt-2">
+              {menuItem.categories.map((category) => (
+                <span
+                  key={category}
+                  className="inline-block bg-orange-500 text-white text-sm px-3 py-1 rounded-full"
+                >
+                  {category}
+                </span>
+              ))}
             </div>
           </Container>
         </div>
@@ -52,11 +59,13 @@ const MenuDetail: React.FC<MenuDetailProps> = ({ menuItem }) => {
         <Container className="pt-8">
           <div className="bg-white rounded-lg shadow-md p-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="overflow-hidden rounded-lg">
+              <div className="overflow-hidden rounded-lg flex items-center justify-center h-auto md:h-[400px]">
                 <OptimizedImage
                   src={menuItem.image}
                   alt={menuItem.name}
-                  objectFit="cover"
+                  objectFit="contain"
+                  height={350}
+                  className="py-1 md:py-4"
                 />
               </div>
 
@@ -71,10 +80,15 @@ const MenuDetail: React.FC<MenuDetailProps> = ({ menuItem }) => {
                     </span>
                   </div>
 
-                  <div className="mb-4">
-                    <span className="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded-full">
-                      {menuItem.category}
-                    </span>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {menuItem.categories.map((category) => (
+                      <span
+                        key={category}
+                        className="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded-full"
+                      >
+                        {category}
+                      </span>
+                    ))}
                   </div>
 
                   {menuItem.spicyLevel > 0 && (
@@ -106,17 +120,17 @@ const MenuDetail: React.FC<MenuDetailProps> = ({ menuItem }) => {
                 </div>
 
                 <div className="mt-auto">
-                  <div className="flex flex-col md:flex-row gap-4">
+                  <div className="flex flex-col gap-4">
                     <Button
                       variant="primary"
-                      className="flex-1"
+                      className="w-full"
                       onClick={handleOrderClick}
                     >
                       Pesan Sekarang
                     </Button>
                     <Button
                       variant="outline"
-                      className="flex-1 flex items-center justify-center gap-2"
+                      className="w-full flex items-center justify-center gap-2"
                       onClick={handleShareWhatsApp}
                     >
                       <OptimizedImage
@@ -159,8 +173,10 @@ const MenuDetail: React.FC<MenuDetailProps> = ({ menuItem }) => {
                 <OptimizedImage
                   src="/images/logos/gofood.svg"
                   alt="GoFood"
-                  height={48}
+                  width={140}
+                  height={50}
                   className="mb-2"
+                  objectFit="contain"
                 />
                 <span className="font-medium">GoFood</span>
               </button>
@@ -175,8 +191,10 @@ const MenuDetail: React.FC<MenuDetailProps> = ({ menuItem }) => {
                 <OptimizedImage
                   src="/images/logos/shopeefood.svg"
                   alt="ShopeeFood"
-                  height={48}
+                  width={140}
+                  height={50}
                   className="mb-2"
+                  objectFit="contain"
                 />
                 <span className="font-medium">ShopeeFood</span>
               </button>

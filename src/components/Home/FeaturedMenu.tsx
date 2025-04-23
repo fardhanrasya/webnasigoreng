@@ -46,13 +46,13 @@ const FeaturedMenu: React.FC = () => {
               >
                 <Link
                   href={`/menu/${formattedMenuName}`}
-                  className="block h-56 overflow-hidden"
+                  className="block h-56 overflow-hidden flex items-center justify-center"
                 >
                   <OptimizedImage
                     src={item.image}
                     alt={item.name}
                     height={224}
-                    className="transition-transform duration-700 hover:scale-105"
+                    className="transition-transform duration-700 hover:scale-105 "
                     objectFit="cover"
                   />
                 </Link>
@@ -68,7 +68,19 @@ const FeaturedMenu: React.FC = () => {
                       Rp{(item.price * 15000).toLocaleString("id-ID")}
                     </span>
                   </div>
-                  <p className="text-gray-600 mb-4">{item.description}</p>
+
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    {item.categories.slice(0, 3).map((category) => (
+                      <span
+                        key={category}
+                        className="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded-full"
+                      >
+                        {category}
+                      </span>
+                    ))}
+                  </div>
+
+                  <p className="text-gray-600 mb-4">{item.shortDescription}</p>
                   <Button
                     variant="primary"
                     size="md"

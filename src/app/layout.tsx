@@ -16,6 +16,10 @@ export const metadata: Metadata = {
     "Restoran Nasi Goreng terbaik di Indonesia dengan cita rasa autentik dan bahan berkualitas.",
   keywords:
     "restoran nasi goreng, nasi goreng indonesia, nasi goreng enak, restoran terbaik, kuliner indonesia",
+  icons: {
+    icon: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 export default function RootLayout({

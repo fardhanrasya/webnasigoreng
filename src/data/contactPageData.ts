@@ -38,12 +38,12 @@ export const contactPageData = {
     email: restaurantData.email,
     hoursTitle: "Opening Hours",
     weekdayHours: {
-      days: restaurantData.openingHours.weekdays.englishDays,
-      hours: restaurantData.openingHours.weekdays.englishHours,
+      days: restaurantData.openingHours.weekdays.days,
+      hours: restaurantData.openingHours.weekdays.hours,
     },
     weekendHours: {
-      days: restaurantData.openingHours.weekend.englishDays,
-      hours: restaurantData.openingHours.weekend.englishHours,
+      days: restaurantData.openingHours.weekend.days,
+      hours: restaurantData.openingHours.weekend.hours,
     },
   },
 };

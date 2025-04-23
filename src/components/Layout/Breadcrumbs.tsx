@@ -1,11 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { ChevronRight } from "lucide-react";
 
 const Breadcrumbs = () => {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  // Mendapatkan parameter kategori dan halaman untuk menu
+  const kategori = searchParams.get("kategori");
+  const page = searchParams.get("page");
+  const isMenuPage = pathname === "/menu";
 
   // Menghapus slash di awal
   const path = pathname.startsWith("/") ? pathname.substring(1) : pathname;
@@ -46,7 +52,7 @@ const Breadcrumbs = () => {
         const displayText = slugToText(item);
 
         // Jika ini adalah item terakhir, jangan buat tautan
-        const isLast = index === paths.length - 1;
+        const isLast = index === paths.length - 1 && !isMenuPage;
 
         return (
           <div key={index} className="flex items-center">
@@ -61,6 +67,31 @@ const Breadcrumbs = () => {
           </div>
         );
       })}
+
+      {/* Tambahkan breadcrumb untuk kategori jika ada */}
+      {isMenuPage && kategori && kategori !== "all" && (
+        <div className="flex items-center">
+          <ChevronRight className="mx-2 text-gray-400" size={16} />
+          {!page || page === "1" ? (
+            <span className="font-medium text-gray-900">{kategori}</span>
+          ) : (
+            <Link
+              href={`/menu?kategori=${kategori}`}
+              className="text-gray-500 hover:text-gray-700"
+            >
+              {kategori}
+            </Link>
+          )}
+        </div>
+      )}
+
+      {/* Tambahkan breadcrumb untuk halaman jika ada dan lebih dari 1 */}
+      {isMenuPage && page && page !== "1" && (
+        <div className="flex items-center">
+          <ChevronRight className="mx-2 text-gray-400" size={16} />
+          <span className="font-medium text-gray-900">Halaman {page}</span>
+        </div>
+      )}
     </div>
   );
 };

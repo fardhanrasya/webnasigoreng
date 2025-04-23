@@ -44,8 +44,10 @@ const OrderModal: React.FC<OrderModalProps> = ({
             <OptimizedImage
               src="/images/logos/gofood.svg"
               alt="GoFood"
-              height={48}
+              width={140}
+              height={50}
               className="mb-2"
+              objectFit="contain"
             />
             <span className="font-medium">GoFood</span>
           </button>
@@ -57,8 +59,10 @@ const OrderModal: React.FC<OrderModalProps> = ({
             <OptimizedImage
               src="/images/logos/shopeefood.svg"
               alt="ShopeeFood"
-              height={48}
+              width={140}
+              height={50}
               className="mb-2"
+              objectFit="contain"
             />
             <span className="font-medium">ShopeeFood</span>
           </button>
