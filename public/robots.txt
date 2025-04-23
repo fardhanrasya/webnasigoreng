@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.nasigorengrestoran.com/sitemap.xml 
+Sitemap: https://webnasigoreng.vercel.app/sitemap.xml 

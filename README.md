@@ -61,7 +61,7 @@ Create a `sitemap-config.js` file in the project root:
 
 ```javascript
 module.exports = {
-  baseUrl: "https://www.nasigorengrestoran.com",
+  baseUrl: "https://webnasigoreng.vercel.app",
   pagesDirectory: "./src/pages",
   targetDirectory: "public",
   sitemapFilename: "sitemap.xml",

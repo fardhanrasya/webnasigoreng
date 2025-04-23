@@ -11,7 +11,7 @@ const NotFound = () => {
           name="description"
           content="Halaman yang Anda cari tidak ditemukan di Restoran Nasi Goreng. Silakan kembali ke halaman utama."
         />
-        <link rel="canonical" href="https://www.nasigorengrestoran.com/404" />
+        <link rel="canonical" href="https://webnasigoreng.vercel.app/404" />
       </Helmet>
 
       <div className="flex flex-col items-center justify-center min-h-[60vh] px-4 py-16 text-center">
