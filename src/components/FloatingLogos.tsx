@@ -1,33 +1,40 @@
-import React, { useState } from "react";
-import whatsappLogo from "../logo/whatsapp-logo.svg";
-import foodDeliveryLogo from "../logo/food-delivery.svg";
-import gofoodLogo from "../logo/gofood.svg";
-import shopeefoodLogo from "../logo/shopeefood.svg";
-import OptimizedImage from "./UI/OptimizedImage";
+"use client";
 
-interface LogoProps {
-  whatsappNumber: string;
-  gofoodLink: string;
-  shopeefoodLink: string;
+import React, { useState } from "react";
+import { Phone, X } from "lucide-react";
+import Image from "next/image";
+import OptimizedImage from "./UI/OptimizedImage";
+import { restaurantData } from "@/data/restaurantData";
+
+interface FloatingLogosProps {
+  whatsappNumber?: string;
+  gofoodLink?: string;
+  shopeefoodLink?: string;
 }
 
-const FloatingLogos: React.FC<LogoProps> = ({
-  whatsappNumber = "6281234567890",
-  gofoodLink = "https://gofood.co.id/restaurant-link",
-  shopeefoodLink = "https://shopeefood.co.id/restaurant-link",
+const FloatingLogos: React.FC<FloatingLogosProps> = ({
+  whatsappNumber,
+  gofoodLink,
+  shopeefoodLink,
 }) => {
+  const [isOpen, setIsOpen] = useState(false);
   const [showFoodOptions, setShowFoodOptions] = useState(false);
 
   const handleWhatsappClick = () => {
-    window.open(`https://wa.me/${whatsappNumber}`, "_blank");
+    window.open(
+      `https://wa.me/${
+        whatsappNumber || restaurantData.phone.replace(/\+|\s|-/g, "")
+      }`,
+      "_blank"
+    );
   };
 
   const handleGofoodClick = () => {
-    window.open(gofoodLink, "_blank");
+    window.open(gofoodLink || restaurantData.delivery.gofood, "_blank");
   };
 
   const handleShopeefoodClick = () => {
-    window.open(shopeefoodLink, "_blank");
+    window.open(shopeefoodLink || restaurantData.delivery.shopeefood, "_blank");
   };
 
   const toggleFoodOptions = () => {
@@ -78,7 +85,7 @@ const FloatingLogos: React.FC<LogoProps> = ({
           title="Chat via WhatsApp"
         >
           <OptimizedImage
-            src={whatsappLogo}
+            src="/images/logos/whatsapp-logo.svg"
             alt="WhatsApp"
             width={64}
             height={64}
@@ -96,7 +103,7 @@ const FloatingLogos: React.FC<LogoProps> = ({
             title="Food Delivery Options"
           >
             <OptimizedImage
-              src={foodDeliveryLogo}
+              src="/images/logos/food-delivery.svg"
               alt="Food Delivery"
               width={64}
               height={64}
@@ -118,7 +125,7 @@ const FloatingLogos: React.FC<LogoProps> = ({
               title="Order via GoFood"
             >
               <OptimizedImage
-                src={gofoodLogo}
+                src="/images/logos/gofood.svg"
                 alt="GoFood"
                 width={112}
                 height={48}
@@ -132,7 +139,7 @@ const FloatingLogos: React.FC<LogoProps> = ({
               title="Order via ShopeeFood"
             >
               <OptimizedImage
-                src={shopeefoodLogo}
+                src="/images/logos/shopeefood.svg"
                 alt="ShopeeFood"
                 width={112}
                 height={48}

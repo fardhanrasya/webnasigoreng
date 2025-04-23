@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { MenuItemType } from "../../types/menu";
 import Button from "../UI/Button";
 import OptimizedImage from "../UI/OptimizedImage";
@@ -16,7 +16,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ item, onOrderClick }) => {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col h-full">
       <Link
-        to={`/menu/detail/${formattedMenuName}`}
+        href={`/menu/${formattedMenuName}`}
         className="block h-48 overflow-hidden"
       >
         <OptimizedImage
@@ -30,7 +30,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ item, onOrderClick }) => {
       <div className="p-4 flex flex-col flex-grow">
         <div className="flex justify-between items-start mb-2">
           <Link
-            to={`/menu/detail/${formattedMenuName}`}
+            href={`/menu/${formattedMenuName}`}
             className="text-lg font-bold text-gray-900 hover:text-orange-600"
           >
             {item.name}

@@ -1,6 +1,4 @@
 import React from "react";
-import gofoodLogo from "../../logo/gofood.svg";
-import shopeefoodLogo from "../../logo/shopeefood.svg";
 import OptimizedImage from "./OptimizedImage";
 
 interface OrderModalProps {
@@ -44,7 +42,7 @@ const OrderModal: React.FC<OrderModalProps> = ({
             className="flex flex-col items-center justify-center p-4 border rounded-lg hover:bg-gray-50 transition-colors"
           >
             <OptimizedImage
-              src={gofoodLogo}
+              src="/images/logos/gofood.svg"
               alt="GoFood"
               height={48}
               className="mb-2"
@@ -57,7 +55,7 @@ const OrderModal: React.FC<OrderModalProps> = ({
             className="flex flex-col items-center justify-center p-4 border rounded-lg hover:bg-gray-50 transition-colors"
           >
             <OptimizedImage
-              src={shopeefoodLogo}
+              src="/images/logos/shopeefood.svg"
               alt="ShopeeFood"
               height={48}
               className="mb-2"

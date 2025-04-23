@@ -2,61 +2,23 @@ import React from "react";
 import SectionTitle from "../UI/SectionTitle";
 import Container from "../UI/Container";
 import OptimizedImage from "../UI/OptimizedImage";
-
-interface Testimonial {
-  id: number;
-  name: string;
-  title: string;
-  quote: string;
-  image: string;
-  rating: number;
-}
-
-const testimonials: Testimonial[] = [
-  {
-    id: 1,
-    name: "Sarah Chen",
-    title: "Food Blogger",
-    quote:
-      "Nasi Goreng terenak yang pernah aku makan di luar Indonesia. Rasanya autentik dan pelayanannya luar biasa!",
-    image:
-      "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=300",
-    rating: 5,
-  },
-  {
-    id: 2,
-    name: "David Wilson",
-    title: "Pelanggan Setia",
-    quote:
-      "Udah setahun aku selalu datang kesini seminggu sekali. Nasi Goreng Seafood mereka bikin ketagihan banget!",
-    image:
-      "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=300",
-    rating: 5,
-  },
-  {
-    id: 3,
-    name: "Maria Rodriguez",
-    title: "Pakar Kuliner",
-    quote:
-      "Perpaduan rasa dan tekstur di hidangan andalan mereka luar biasa. Wajib dikunjungi bagi penggemar masakan Indonesia.",
-    image:
-      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=300",
-    rating: 4,
-  },
-];
+import { testimonialData } from "../../data/testimonialData";
+import { homePageData } from "../../data/homePageData";
 
 const Testimonials: React.FC = () => {
+  const { testimonials } = homePageData;
+
   return (
     <section className="py-16 bg-gray-50">
       <Container>
         <SectionTitle
-          title="Kata Mereka Tentang Kami"
-          subtitle="Jangan cuma percaya kata-kata kami - simak apa kata pelanggan yang sudah makan di sini"
+          title={testimonials.title}
+          subtitle={testimonials.subtitle}
           centered
         />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial) => (
+          {testimonialData.map((testimonial) => (
             <div
               key={testimonial.id}
               className="bg-white rounded-lg shadow-md p-6 flex flex-col transition-transform duration-300 hover:-translate-y-2"
@@ -75,7 +37,9 @@ const Testimonials: React.FC = () => {
                   <h4 className="font-bold text-gray-900">
                     {testimonial.name}
                   </h4>
-                  <p className="text-sm text-gray-600">{testimonial.title}</p>
+                  <p className="text-sm text-gray-600">
+                    {testimonial.occupation}
+                  </p>
                 </div>
               </div>
 
@@ -97,7 +61,7 @@ const Testimonials: React.FC = () => {
               </div>
 
               <blockquote className="text-gray-700 italic flex-grow">
-                "{testimonial.quote}"
+                "{testimonial.comment}"
               </blockquote>
             </div>
           ))}

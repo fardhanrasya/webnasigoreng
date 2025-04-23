@@ -1,70 +1,38 @@
-import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
-import { menuData } from "../data/menuData";
-import { MenuItemType } from "../types/menu";
-import SEO from "../components/SEO";
-import Container from "../components/UI/Container";
-import Button from "../components/UI/Button";
-import OrderModal from "../components/UI/OrderModal";
-import whatsappLogo from "../logo/whatsapp-logo.svg";
-import gofoodLogo from "../logo/gofood.svg";
-import shopeefoodLogo from "../logo/shopeefood.svg";
-import OptimizedImage from "../components/UI/OptimizedImage";
+"use client";
 
-const MenuDetail: React.FC = () => {
-  const { menuName } = useParams<{ menuName: string }>();
+import React, { useState } from "react";
+import Link from "next/link";
+import { MenuItemType } from "@/types/menu";
+import Container from "../UI/Container";
+import Button from "../UI/Button";
+import OrderModal from "../UI/OrderModal";
+import OptimizedImage from "../UI/OptimizedImage";
+
+interface MenuDetailProps {
+  menuItem: MenuItemType;
+}
+
+const MenuDetail: React.FC<MenuDetailProps> = ({ menuItem }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [menuItem, setMenuItem] = useState<MenuItemType | null>(null);
-
-  useEffect(() => {
-    const foundItem = menuData.find(
-      (item) => item.name.toLowerCase().replace(/\s+/g, "-") === menuName
-    );
-    if (foundItem) {
-      setMenuItem(foundItem);
-    }
-  }, [menuName]);
 
   const handleOrderClick = () => {
-    if (menuItem) {
-      setModalOpen(true);
-    }
+    setModalOpen(true);
   };
 
   const handleShareWhatsApp = () => {
-    if (menuItem) {
-      const currentUrl = window.location.href;
-      const message = `Lihat menu lezat ini: ${menuItem.name} - ${
-        menuItem.description
-      }. Harga: Rp${(menuItem.price * 15000).toLocaleString(
-        "id-ID"
-      )}. Kunjungi: ${currentUrl}
-      `;
-      const encodedMessage = encodeURIComponent(message);
-      window.open(`https://wa.me/?text=${encodedMessage}`, "_blank");
-    }
+    const currentUrl = window.location.href;
+    const message = `Lihat menu lezat ini: ${menuItem.name} - ${
+      menuItem.description
+    }. Harga: Rp${(menuItem.price * 15000).toLocaleString(
+      "id-ID"
+    )}. Kunjungi: ${currentUrl}
+    `;
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/?text=${encodedMessage}`, "_blank");
   };
-
-  if (!menuItem) {
-    return (
-      <Container className="py-16">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4">Menu tidak ditemukan</h2>
-        </div>
-      </Container>
-    );
-  }
 
   return (
     <>
-      <SEO
-        title={`${menuItem.name} - Detail Menu`}
-        description={menuItem.description}
-        keywords={`${menuItem.name}, ${menuItem.category}, menu makanan indonesia`}
-        ogType="product"
-        ogImage={menuItem.image}
-      />
-
       {/* Hero Section */}
       <div
         className="relative bg-cover bg-center h-[50vh]"
@@ -152,7 +120,7 @@ const MenuDetail: React.FC = () => {
                       onClick={handleShareWhatsApp}
                     >
                       <OptimizedImage
-                        src={whatsappLogo}
+                        src="/images/logos/whatsapp-logo.svg"
                         alt="WhatsApp"
                         width={20}
                         height={20}
@@ -189,7 +157,7 @@ const MenuDetail: React.FC = () => {
                 className="flex flex-col items-center justify-center p-4 border rounded-lg hover:bg-gray-50 transition-colors"
               >
                 <OptimizedImage
-                  src={gofoodLogo}
+                  src="/images/logos/gofood.svg"
                   alt="GoFood"
                   height={48}
                   className="mb-2"
@@ -205,7 +173,7 @@ const MenuDetail: React.FC = () => {
                 className="flex flex-col items-center justify-center p-4 border rounded-lg hover:bg-gray-50 transition-colors"
               >
                 <OptimizedImage
-                  src={shopeefoodLogo}
+                  src="/images/logos/shopeefood.svg"
                   alt="ShopeeFood"
                   height={48}
                   className="mb-2"

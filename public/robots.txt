@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://webnasigoreng.vercel.app/mysites.xml 
