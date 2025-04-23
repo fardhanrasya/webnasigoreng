@@ -1,8 +1,9 @@
 import { MetadataRoute } from "next";
 import { menuData, categories } from "@/data/menuData";
+import siteConfig from "./env";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://nasigorengrestoran.com";
+  const baseUrl = siteConfig.baseUrl;
   const ITEMS_PER_PAGE = 6; // Pastikan sama dengan nilai di MenuList.tsx
 
   // Halaman statis

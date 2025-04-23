@@ -6,6 +6,7 @@ import React, {
   useRef,
   useMemo,
   useCallback,
+  Suspense,
 } from "react";
 import MenuItem from "./MenuItem";
 import { MenuItemType } from "../../types/menu";
@@ -95,7 +96,7 @@ const PaginationLink: React.FC<{
   </Link>
 );
 
-const MenuList: React.FC<MenuListProps> = ({ items, categories }) => {
+const MenuListContent: React.FC<MenuListProps> = ({ items, categories }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -443,6 +444,14 @@ const MenuList: React.FC<MenuListProps> = ({ items, categories }) => {
         productName={selectedProduct}
       />
     </div>
+  );
+};
+
+const MenuList: React.FC<MenuListProps> = (props) => {
+  return (
+    <Suspense fallback={<div className="p-4 text-center">Memuat menu...</div>}>
+      <MenuListContent {...props} />
+    </Suspense>
   );
 };
 

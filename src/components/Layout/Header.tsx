@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 
-const Header = () => {
+const HeaderContent = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
@@ -120,6 +120,31 @@ const Header = () => {
         </div>
       )}
     </header>
+  );
+};
+
+const Header = () => {
+  return (
+    <Suspense
+      fallback={
+        <header className="fixed w-full z-50 bg-white shadow-md py-2">
+          <div className="container mx-auto px-4">
+            <div className="flex justify-between items-center py-1">
+              <Link href="/" className="relative z-10">
+                <div className="flex items-center">
+                  <span className="font-bold text-2xl">
+                    <span className="text-orange-600">Nasi</span>
+                    <span className="text-yellow-500">Goreng</span>
+                  </span>
+                </div>
+              </Link>
+            </div>
+          </div>
+        </header>
+      }
+    >
+      <HeaderContent />
+    </Suspense>
   );
 };
 

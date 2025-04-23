@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { ChevronRight } from "lucide-react";
+import { Suspense } from "react";
 
-const Breadcrumbs = () => {
+const BreadcrumbsContent = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -93,6 +94,14 @@ const Breadcrumbs = () => {
         </div>
       )}
     </div>
+  );
+};
+
+const Breadcrumbs = () => {
+  return (
+    <Suspense fallback={<div className="py-2 text-sm">Memuat navigasi...</div>}>
+      <BreadcrumbsContent />
+    </Suspense>
   );
 };
 

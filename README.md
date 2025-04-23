@@ -148,6 +148,54 @@ Website ini dioptimalkan untuk:
 - Pengalaman pengguna yang intuitif
 - Responsif di semua perangkat
 
+## Konfigurasi URL & Metadata
+
+Semua konfigurasi URL, metadata, dan informasi kontak terpusat di file `src/app/env.ts`. Untuk mengubah URL website atau informasi lainnya, cukup edit file ini.
+
+### Cara Mengubah URL Website
+
+1. Buka file `src/app/env.ts`
+2. Cari variabel `PRODUCTION_URL` dan ubah nilainya:
+   ```typescript
+   const PRODUCTION_URL = "https://domain-baru-anda.com";
+   ```
+3. Jika perlu mengubah domain saja, juga ubah nilai berikut:
+   ```typescript
+   domain: IS_DEVELOPMENT ? 'localhost:3000' : 'domain-baru-anda.com',
+   ```
+
+### Penggunaan Dalam Kode
+
+Untuk menggunakan konfigurasi ini dalam kode:
+
+```typescript
+import siteConfig from "@/app/env";
+
+// Contoh penggunaan
+const baseUrl = siteConfig.baseUrl;
+const instagramUrl = siteConfig.social.instagram;
+```
+
+### Environment Development/Production
+
+Untuk beralih antara environment development dan production, ubah nilai `IS_DEVELOPMENT`:
+
+```typescript
+// Untuk development (localhost:3000)
+const IS_DEVELOPMENT = true;
+
+// Untuk production
+const IS_DEVELOPMENT = false;
+```
+
+### API Publik
+
+Konfigurasi website juga dapat diakses melalui API endpoint:
+
+```
+/.well-known/site-config.json
+```
+
 ---
 
 &copy; 2024 Restoran Nasi Goreng. Dibuat dengan ❤️ menggunakan Next.js

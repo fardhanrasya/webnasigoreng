@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
 import FloatingLogos from "@/components/FloatingLogos";
+import siteConfig from "./env";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -20,6 +21,7 @@ export const metadata: Metadata = {
     icon: "/favicon.png",
     apple: "/favicon.png",
   },
+  metadataBase: new URL(siteConfig.baseUrl),
 };
 
 export default function RootLayout({
