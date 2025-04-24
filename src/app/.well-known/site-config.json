@@ -1,0 +1,18 @@
+{
+  "siteUrl": "https://webnasigoreng.vercel.app",
+  "siteName": "Restoran Nasi Goreng",
+  "contact": {
+    "phone": "+6281234567890",
+    "email": "kontak@webnasigoreng.vercel.app",
+    "address": "Jl. Nasi Goreng No. 123, Jakarta, Indonesia"
+  },
+  "social": {
+    "instagram": "https://instagram.com/nasigorengrestoran",
+    "facebook": "https://facebook.com/nasigorengrestoran",
+    "twitter": "https://twitter.com/nasigorengrestoran"
+  },
+  "delivery": {
+    "gofood": "https://gofood.co.id/restaurant-link",
+    "shopeefood": "https://shopeefood.co.id/restaurant-link"
+  }
+}

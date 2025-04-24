@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { MenuItemType } from "../../types/menu";
 import Button from "../UI/Button";
 import OptimizedImage from "../UI/OptimizedImage";
@@ -16,8 +16,8 @@ const MenuItem: React.FC<MenuItemProps> = ({ item, onOrderClick }) => {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col h-full">
       <Link
-        to={`/menu/detail/${formattedMenuName}`}
-        className="block h-48 overflow-hidden"
+        href={`/menu/${formattedMenuName}`}
+        className="block h-48 overflow-hidden flex items-center justify-center"
       >
         <OptimizedImage
           src={item.image}
@@ -30,7 +30,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ item, onOrderClick }) => {
       <div className="p-4 flex flex-col flex-grow">
         <div className="flex justify-between items-start mb-2">
           <Link
-            to={`/menu/detail/${formattedMenuName}`}
+            href={`/menu/${formattedMenuName}`}
             className="text-lg font-bold text-gray-900 hover:text-orange-600"
           >
             {item.name}
@@ -39,10 +39,27 @@ const MenuItem: React.FC<MenuItemProps> = ({ item, onOrderClick }) => {
             Rp{(item.price * 15000).toLocaleString("id-ID")}
           </span>
         </div>
-        <p className="text-gray-600 text-sm mb-3">{item.description}</p>
+        <p className="text-gray-600 text-sm mb-3">{item.shortDescription}</p>
+
+        <div className="flex flex-wrap gap-1 mb-2">
+          {item.categories.slice(0, 3).map((category) => (
+            <span
+              key={category}
+              className="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded-full"
+            >
+              {category}
+            </span>
+          ))}
+          {item.categories.length > 3 && (
+            <span className="inline-block text-gray-500 text-xs px-1">
+              +{item.categories.length - 3}
+            </span>
+          )}
+        </div>
+
         {item.spicyLevel > 0 && (
           <div className="flex items-center mb-3">
-            <span className="text-xs mr-2 text-gray-700">Spicy Level:</span>
+            <span className="text-xs mr-2 text-gray-700">Level Pedas:</span>
             <div className="flex">
               {[...Array(3)].map((_, i) => (
                 <span

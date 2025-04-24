@@ -1,157 +1,201 @@
-# Restoran Nasi Goreng Website
+# 🍽️ Restoran Nasi Goreng - Website
 
-A modern React-based website for Restoran Nasi Goreng, showcasing menus, information, and contact details. Built with TypeScript, Vite, and Tailwind CSS.
+![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-blue?style=for-the-badge&logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=for-the-badge&logo=tailwind-css)
 
-## Features
+Website modern untuk Restoran Nasi Goreng Indonesia yang menampilkan berbagai hidangan nasi goreng otentik dan menu Indonesia lainnya.
 
-- 🏠 Responsive landing page with hero section, featured menu, about section, and testimonials
-- 🍽️ Complete menu catalog with detailed item pages
-- 📱 Mobile-friendly design
-- 🔍 SEO optimized with meta tags and sitemap
-- 🖼️ Optimized image loading
-- 🛍️ Integration with food delivery platforms (GoFood, ShopeeFood)
-- 💬 WhatsApp integration for direct orders
-- 📍 Contact form and location information
-- 🎨 Modern UI components with Tailwind CSS
-- 🌐 Automatic sitemap generation
+## ✨ Fitur Utama
 
-## Project Structure
+- 🚀 Performa tinggi dengan Next.js 14 (App Router)
+- 📱 Responsif untuk semua ukuran perangkat
+- 🎨 Desain modern dengan Tailwind CSS
+- 🔍 SEO-friendly dengan sitemap otomatis
+- 🖼️ Optimisasi gambar otomatis
+- 📊 Data terstruktur untuk manajemen konten
+- 💬 Integrasi WhatsApp untuk pemesanan dan pertanyaan
+
+## 📋 Pengelolaan Data
+
+### 📁 Struktur Data
+
+Semua data terstruktur tersimpan di folder `src/data` dalam format TypeScript:
+
+| File                 | Deskripsi                       |
+| -------------------- | ------------------------------- |
+| `menuData.ts`        | Data menu makanan dan minuman   |
+| `homePageData.ts`    | Konten halaman utama            |
+| `aboutPageData.ts`   | Konten halaman tentang kami     |
+| `contactPageData.ts` | Konten halaman kontak           |
+| `menuPageData.ts`    | Konten halaman menu             |
+| `testimonialData.ts` | Data testimonial pelanggan      |
+| `restaurantData.ts`  | Informasi umum tentang restoran |
+| `imageUrls.ts`       | Path gambar terstruktur         |
+| `iconsData.ts`       | Data icon untuk website         |
+
+### 🍜 Struktur Data Menu (`menuData.ts`)
+
+```typescript
+{
+  id: number;           // ID unik untuk menu
+  name: string;         // Nama menu
+  shortDescription: string; // Deskripsi singkat untuk card
+  description: string;  // Deskripsi lengkap menu
+  price: number;        // Harga menu (dalam satuan dolar yang dikonversi ke rupiah)
+  categories: string[]; // Kategori menu (array)
+  image: string;        // Path gambar
+  spicyLevel: number;   // Level kepedasan (0-3)
+  featured: boolean;    // Tampil di halaman utama
+}
+```
+
+## 📸 Panduan Gambar
+
+### 📷 Rekomendasi Ukuran Gambar
+
+#### Gambar Menu
+
+| Tampilan    | Ukuran Optimal    | Rasio | Format   | Keterangan                           |
+| ----------- | ----------------- | ----- | -------- | ------------------------------------ |
+| Menu Utama  | 800 × 600px       | 4:3   | JPG/WebP | Kualitas 75-80%                      |
+| Daftar Menu | Min. 640 × 480px  | 4:3   | JPG/WebP | Dioptimalkan untuk area tinggi 192px |
+| Hero Image  | 1200-1920px lebar | 16:9  | JPG/WebP | Untuk background header detail menu  |
+
+#### Tips Kualitas Foto Menu
+
+- Gunakan format WebP untuk performa terbaik (JPG sebagai fallback)
+- Ukuran file maksimal 300KB untuk performa optimal
+- Gunakan mode warna sRGB untuk konsistensi warna di berbagai perangkat
+- Pastikan foto memiliki:
+  - Pencahayaan yang baik dan konsisten
+  - Latar belakang yang tidak terlalu ramai
+  - Fokus yang tajam pada makanan
+  - Sudut pengambilan yang menampilkan tekstur dan detail makanan
+
+#### Gambar Lainnya
+
+| Jenis              | Ukuran Rekomendasi | Rasio | Format           |
+| ------------------ | ------------------ | ----- | ---------------- |
+| Chef/Team          | 500 × 500px        | 1:1   | JPG/WebP         |
+| Testimonial        | 300 × 300px        | 1:1   | JPG/WebP         |
+| Logo               | 200 × 200px        | 1:1   | PNG (transparan) |
+| Interior/Eksterior | 1200 × 800px       | 3:2   | JPG/WebP         |
+
+### 📁 Struktur Folder Gambar
 
 ```
-src/
-├── assets/
-├── components/
-│   ├── About/
-│   ├── Contact/
-│   ├── Home/
-│   ├── Layout/
-│   ├── Menu/
-│   └── UI/
-├── data/
-├── logo/
-├── pages/
-└── types/
+public/images/
+├── menu/           # Gambar menu (nama-menu.jpg/webp)
+├── team/           # Gambar tim restoran (chef/staff)
+├── testimonials/   # Gambar testimonial (testimonial-1.jpg)
+├── restaurant/     # Gambar restoran (interior.jpg, exterior.jpg)
+└── logos/          # Logo dan icon (logo.png, whatsapp-logo.svg)
 ```
 
-## Automatic Sitemap Generation
-
-The project includes automated sitemap generation to improve SEO. Here's how to set it up:
-
-### 1. Install sitemap-generator
-
-Add the sitemap-generator package to your project:
+## 🚀 Menjalankan Website
 
 ```bash
-npm install --save-dev sitemap-generator-cli
+# Install dependencies
+npm install
+
+# Jalankan server development
+npm run dev
+
+# Buka http://localhost:3000 di browser
 ```
 
-### 2. Add script to package.json
+## 🏗️ Build untuk Production
 
-Add the following script to your package.json:
+```bash
+# Build website
+npm run build
 
-```json
-"scripts": {
-  "generate-sitemap": "npx sitemap-generator-cli --config=sitemap-config.js"
-}
+# Jalankan versi production
+npm start
 ```
 
-### 3. Create sitemap configuration
+## 📂 Struktur Folder
 
-Create a `sitemap-config.js` file in the project root:
-
-```javascript
-module.exports = {
-  baseUrl: "https://webnasigoreng.vercel.app",
-  pagesDirectory: "./src/pages",
-  targetDirectory: "public",
-  sitemapFilename: "sitemap.xml",
-  ignoredExtensions: ["tsx", "ts"],
-  ignoredPaths: ["404", "_app"],
-  extraPaths: [
-    "/menu/detail/nasi-goreng-spesial",
-    "/menu/detail/nasi-goreng-seafood",
-  ],
-  pagesConfig: {
-    "/": {
-      priority: 1.0,
-      changefreq: "weekly",
-    },
-    "/menu": {
-      priority: 0.8,
-      changefreq: "weekly",
-    },
-    "/about": {
-      priority: 0.7,
-      changefreq: "monthly",
-    },
-    "/contact": {
-      priority: 0.6,
-      changefreq: "monthly",
-    },
-  },
-};
+```
+project/
+├── public/            # Aset statis (gambar, font, dll)
+├── src/
+│   ├── app/           # Routing Next.js dan layout page
+│   ├── components/    # Komponen React terstruktur
+│   │   ├── Home/      # Komponen khusus halaman Home
+│   │   ├── Menu/      # Komponen terkait menu
+│   │   ├── About/     # Komponen halaman About
+│   │   ├── Contact/   # Komponen halaman Contact
+│   │   ├── Layout/    # Komponen layout (Header, Footer)
+│   │   └── UI/        # Komponen UI reusable
+│   ├── data/          # Data statis (menu, dll)
+│   └── types/         # TypeScript type definitions
+├── next.config.js     # Konfigurasi Next.js
+├── tailwind.config.js # Konfigurasi Tailwind CSS
+├── generate-sitemap.js # Script generator sitemap
+├── sitemap-config.js  # Konfigurasi sitemap
+└── package.json       # Dependencies dan script
 ```
 
-### 4. GitHub Actions Integration (Optional)
+## 💻 Pengembangan
 
-For automatic updates using GitHub Actions, create `.github/workflows/sitemap.yml`:
+Website ini dioptimalkan untuk:
 
-```yaml
-name: Generate Sitemap
+- Kecepatan loading yang cepat
+- Aksesibilitas
+- SEO
+- Pengalaman pengguna yang intuitif
+- Responsif di semua perangkat
 
-on:
-  push:
-    branches: [main]
-  schedule:
-    - cron: "0 0 * * 0" # Every Sunday at 00:00 UTC
+## Konfigurasi URL & Metadata
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
+Semua konfigurasi URL, metadata, dan informasi kontak terpusat di file `src/app/env.ts`. Untuk mengubah URL website atau informasi lainnya, cukup edit file ini.
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: "16"
+### Cara Mengubah URL Website
 
-      - name: Install dependencies
-        run: npm ci
+1. Buka file `src/app/env.ts`
+2. Cari variabel `PRODUCTION_URL` dan ubah nilainya:
+   ```typescript
+   const PRODUCTION_URL = "https://domain-baru-anda.com";
+   ```
+3. Jika perlu mengubah domain saja, juga ubah nilai berikut:
+   ```typescript
+   domain: IS_DEVELOPMENT ? 'localhost:3000' : 'domain-baru-anda.com',
+   ```
 
-      - name: Generate sitemap
-        run: npm run generate-sitemap
+### Penggunaan Dalam Kode
 
-      - name: Commit and push changes
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: "chore: update sitemap.xml"
-          file_pattern: public/sitemap.xml
+Untuk menggunakan konfigurasi ini dalam kode:
+
+```typescript
+import siteConfig from "@/app/env";
+
+// Contoh penggunaan
+const baseUrl = siteConfig.baseUrl;
+const instagramUrl = siteConfig.social.instagram;
 ```
 
-### 5. Add to Build Process
+### Environment Development/Production
 
-Include sitemap generation in your build process:
+Untuk beralih antara environment development dan production, ubah nilai `IS_DEVELOPMENT`:
 
-```json
-"scripts": {
-  "build": "vite build && npm run generate-sitemap"
-}
+```typescript
+// Untuk development (localhost:3000)
+const IS_DEVELOPMENT = true;
+
+// Untuk production
+const IS_DEVELOPMENT = false;
 ```
 
-## Getting Started
+### API Publik
 
-1. Clone the repository
-2. Install dependencies: `npm install`
-3. Start development server: `npm run dev`
-4. Build for production: `npm run build`
+Konfigurasi website juga dapat diakses melalui API endpoint:
 
-## Tech Stack
+```
+/.well-known/site-config.json
+```
 
-- React
-- TypeScript
-- Vite
-- Tailwind CSS
-- React Router
-- ESLint
-- PostCSS
+---
+
+&copy; 2024 Restoran Nasi Goreng. Dibuat dengan ❤️ menggunakan Next.js

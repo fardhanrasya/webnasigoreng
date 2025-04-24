@@ -1,14 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import Button from "../UI/Button";
+import { restaurantData } from "../../data/restaurantData";
+import { homePageData } from "../../data/homePageData";
 
 const Hero: React.FC = () => {
+  const { hero } = homePageData;
+
   return (
     <section
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-cover bg-center"
       style={{
-        backgroundImage:
-          'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("https://images.pexels.com/photos/5898313/pexels-photo-5898313.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")',
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("${hero.backgroundImage}")`,
       }}
       aria-label="Hero section"
     >
@@ -17,26 +20,31 @@ const Hero: React.FC = () => {
       <div className="container mx-auto px-4 text-center relative z-10 animate-fadeIn">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 drop-shadow-lg">
-            Nasi Goreng <span className="text-yellow-500">Indonesia</span> Asli
+            {restaurantData.name}{" "}
+            <span className="text-yellow-500">{restaurantData.slogan}</span>
           </h1>
           <p className="text-xl text-gray-200 mb-8 drop-shadow">
-            Rasakan perpaduan sempurna rempah-rempah, aroma khas, dan
-            bahan-bahan terbaik dalam sajian nasi goreng paling legendaris di
-            Indonesia.
+            {hero.description}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/menu" aria-label="Lihat Menu Kami">
+            <Link
+              href={hero.primaryButton.link}
+              aria-label={hero.primaryButton.text}
+            >
               <Button size="lg" variant="primary">
-                Lihat Menu Kami
+                {hero.primaryButton.text}
               </Button>
             </Link>
-            <Link to="/contact" aria-label="Reservasi Meja">
+            <Link
+              href={hero.secondaryButton.link}
+              aria-label={hero.secondaryButton.text}
+            >
               <Button
                 size="lg"
                 variant="outline"
                 className="text-white border-white hover:bg-white/10"
               >
-                Reservasi Meja
+                {hero.secondaryButton.text}
               </Button>
             </Link>
           </div>

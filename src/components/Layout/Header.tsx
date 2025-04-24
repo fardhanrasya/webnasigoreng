@@ -1,18 +1,28 @@
-import React, { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+"use client";
 
-const Header: React.FC = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const location = useLocation();
+import { useState, useEffect, Suspense } from "react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { Menu, X } from "lucide-react";
+
+const HeaderContent = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+
+  const navigationItems = [
+    { name: "Beranda", href: "/" },
+    { name: "Menu", href: "/menu" },
+    { name: "Tentang Kami", href: "/about" },
+    { name: "Kontak", href: "/contact" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
-        setIsScrolled(true);
+        setScrolled(true);
       } else {
-        setIsScrolled(false);
+        setScrolled(false);
       }
     };
 
@@ -20,102 +30,121 @@ const Header: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close mobile menu when navigating to a new page
   useEffect(() => {
-    setIsMobileMenuOpen(false);
-  }, [location]);
-
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
-  const isActive = (path: string) => {
-    if (path === "/" && location.pathname === "/") {
-      return true;
-    }
-    return path !== "/" && location.pathname.startsWith(path);
-  };
+    setIsOpen(false);
+  }, [pathname]);
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white shadow-md py-2" : "bg-transparent py-4"
+      className={`fixed w-full z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-white shadow-md py-2"
+          : "bg-transparent lg:py-4 pt-3 md:pt-0"
       }`}
     >
-      <div className="container mx-auto px-4 flex justify-between items-center">
-        <Link to="/" className="flex items-center space-x-2">
-          <span
-            className={`text-2xl font-bold ${
-              isScrolled ? "text-orange-600" : "text-white"
-            }`}
+      <div className="container mx-auto px-4">
+        <div className="flex justify-between items-center py-1">
+          {/* Logo */}
+          <Link href="/" className="relative z-10">
+            <div className="flex items-center">
+              <span
+                className={`font-bold text-2xl ${
+                  scrolled || isOpen ? "" : "text-white lg:text-white"
+                }`}
+              >
+                <span
+                  className={
+                    scrolled || isOpen ? "text-orange-600" : "text-white"
+                  }
+                >
+                  Nasi
+                </span>
+                <span className={"text-yellow-500"}>Goreng</span>
+              </span>
+            </div>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex space-x-8 mt-1">
+            {navigationItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={`font-medium transition-colors ${
+                  pathname === item.href
+                    ? "text-amber-500"
+                    : scrolled
+                    ? "text-gray-900 hover:text-amber-500"
+                    : "text-white hover:text-amber-200"
+                }`}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="lg:hidden z-10"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label={isOpen ? "Close Menu" : "Open Menu"}
           >
-            Nasi<span className="text-yellow-500">Goreng</span>
-          </span>
-        </Link>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-8">
-          {[
-            { name: "Beranda", path: "/" },
-            { name: "Menu", path: "/menu" },
-            { name: "Tentang", path: "/about" },
-            { name: "Kontak", path: "/contact" },
-          ].map((item) => (
-            <Link
-              key={item.name}
-              to={item.path}
-              className={`${
-                isScrolled
-                  ? "text-gray-800 hover:text-orange-600"
-                  : "text-white hover:text-yellow-400"
-              } ${
-                isActive(item.path)
-                  ? isScrolled
-                    ? "text-orange-600 font-bold"
-                    : "text-yellow-400 font-bold"
-                  : ""
-              } font-medium transition-colors duration-200`}
-            >
-              {item.name}
-            </Link>
-          ))}
-        </nav>
-
-        {/* Mobile Menu Button */}
-        <button
-          onClick={toggleMobileMenu}
-          className="md:hidden text-2xl focus:outline-none"
-          aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
-        >
-          {isMobileMenuOpen ? (
-            <X className={isScrolled ? "text-gray-800" : "text-white"} />
-          ) : (
-            <Menu className={isScrolled ? "text-gray-800" : "text-white"} />
-          )}
-        </button>
+            {isOpen ? (
+              <X className={scrolled ? "text-gray-900" : "text-white"} />
+            ) : (
+              <Menu className={scrolled ? "text-gray-900" : "text-white"} />
+            )}
+          </button>
+        </div>
       </div>
 
-      {/* Mobile Navigation */}
-      {isMobileMenuOpen && (
-        <nav className="md:hidden bg-white shadow-xl absolute top-full left-0 right-0 py-4 px-4 flex flex-col space-y-4 animate-fadeIn">
-          {[
-            { name: "Beranda", path: "/" },
-            { name: "Menu", path: "/menu" },
-            { name: "Tentang", path: "/about" },
-            { name: "Kontak", path: "/contact" },
-          ].map((item) => (
-            <Link
-              key={item.name}
-              to={item.path}
-              className={`text-gray-800 hover:text-orange-600 font-medium py-2 border-b border-gray-100 ${
-                isActive(item.path) ? "text-orange-600 font-bold" : ""
-              }`}
-            >
-              {item.name}
-            </Link>
-          ))}
-        </nav>
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="fixed inset-0 bg-white z-0 pt-20 px-4">
+          <nav className="flex flex-col space-y-4">
+            {navigationItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={`text-lg py-2 ${
+                  pathname === item.href
+                    ? "text-amber-500 font-medium"
+                    : "text-gray-800 hover:text-amber-500"
+                }`}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </nav>
+        </div>
       )}
     </header>
+  );
+};
+
+const Header = () => {
+  return (
+    <Suspense
+      fallback={
+        <header className="fixed w-full z-50 bg-white shadow-md py-2">
+          <div className="container mx-auto px-4">
+            <div className="flex justify-between items-center py-1">
+              <Link href="/" className="relative z-10">
+                <div className="flex items-center">
+                  <span className="font-bold text-2xl">
+                    <span className="text-orange-600">Nasi</span>
+                    <span className="text-yellow-500">Goreng</span>
+                  </span>
+                </div>
+              </Link>
+            </div>
+          </div>
+        </header>
+      }
+    >
+      <HeaderContent />
+    </Suspense>
   );
 };
 

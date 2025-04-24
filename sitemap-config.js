@@ -1,12 +1,13 @@
+import { siteConfig } from "./src/app/env.js";
+
 export default {
-  baseUrl: "https://webnasigoreng.vercel.app",
+  baseUrl: siteConfig.baseUrl,
   pagesDirectory: "./src/pages",
   targetDirectory: "public",
   sitemapFilename: "mysites.xml",
   ignoredExtensions: ["tsx", "ts"],
   ignoredPaths: ["404", "_app", "NotFound"],
-  extraPaths: [
-  ],
+  extraPaths: [],
   pagesConfig: {
     "/": {
       priority: 1.0,
