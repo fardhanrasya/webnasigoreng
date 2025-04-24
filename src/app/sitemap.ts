@@ -78,12 +78,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
         ...Array.from({ length: totalPages }, (_, i) => i + 1)
           .filter((page) => page > 1) // Halaman 1 sudah tercakup di atas
-          .map((page) => ({
-            url: `${baseUrl}/menu?kategori=${encodeURI(category)}&page=${page}`,
-            lastModified: new Date(),
-            changeFrequency: "weekly" as const,
-            priority: 0.6,
-          })),
+          .map((page) => {
+            // Buat URL mentah
+            const rawUrl = `${baseUrl}/menu?kategori=${encodeURI(
+              category
+            )}&page=${page}`;
+            // Escape karakter '&' secara manual untuk XML
+            const xmlEscapedUrl = rawUrl.replace(/&/g, "&amp;");
+            return {
+              url: xmlEscapedUrl,
+              lastModified: new Date(),
+              changeFrequency: "weekly" as const,
+              priority: 0.6,
+            };
+          }),
       ];
 
       return pages;
