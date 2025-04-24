@@ -1,0 +1,21 @@
+{
+  "name": "Restoran Nasi Goreng",
+  "short_name": "Nasi Goreng",
+  "description": "Restoran Nasi Goreng terbaik di Indonesia dengan cita rasa autentik",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ff4d4d",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

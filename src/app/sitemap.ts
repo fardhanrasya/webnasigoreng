@@ -44,15 +44,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     };
   });
 
-  const categoryPages = categories.map((category) => {
-    return {
-      url: `${baseUrl}/menu?kategori=${encodeURIComponent(category)}`,
-      lastModified: new Date(),
-      changeFrequency: "weekly" as const,
-      priority: 0.6,
-    };
-  });
-
   // Mengembalikan hanya halaman statis dan detail menu (tanpa pagination dan query)
-  return [...staticPages, ...menuPages, ...categoryPages];
+  return [...staticPages, ...menuPages];
 }
