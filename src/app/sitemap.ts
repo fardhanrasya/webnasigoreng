@@ -1,10 +1,9 @@
 import { MetadataRoute } from "next";
-import { menuData, categories } from "@/data/menuData";
+import { categories, menuData } from "@/data/menuData";
 import siteConfig from "./env";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = siteConfig.baseUrl;
-  const ITEMS_PER_PAGE = 6; // Pastikan sama dengan nilai di MenuList.tsx
 
   // Halaman statis
   const staticPages = [
@@ -34,7 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // Menu detail pages
+  // Menu detail pages - ini adalah canonical URL untuk setiap menu
   const menuPages = menuData.map((item) => {
     const menuSlug = item.name.toLowerCase().replace(/\s+/g, "-");
     return {
@@ -45,58 +44,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     };
   });
 
-  // Halaman paginasi untuk semua menu
-  const totalMenuPages = Math.ceil(menuData.length / ITEMS_PER_PAGE);
-  const paginationPages = Array.from(
-    { length: totalMenuPages },
-    (_, i) => i + 1
-  )
-    .filter((page) => page > 1) // Halaman 1 sudah ada di staticPages
-    .map((page) => ({
-      url: `${baseUrl}/menu?page=${page}`,
+  const categoryPages = categories.map((category) => {
+    return {
+      url: `${baseUrl}/menu?kategori=${encodeURIComponent(category)}`,
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
       priority: 0.6,
-    }));
+    };
+  });
 
-  // Halaman kategori menu
-  const categoryPages = categories
-    .map((category) => {
-      // Hitung jumlah item dalam kategori ini
-      const itemsInCategory = menuData.filter((item) =>
-        item.categories.includes(category)
-      );
-      const totalPages = Math.ceil(itemsInCategory.length / ITEMS_PER_PAGE);
-
-      // Buat array halaman untuk kategori ini
-      const pages = [
-        {
-          url: `${baseUrl}/menu?kategori=${encodeURI(category)}`,
-          lastModified: new Date(),
-          changeFrequency: "weekly" as const,
-          priority: 0.7,
-        },
-        ...Array.from({ length: totalPages }, (_, i) => i + 1)
-          .filter((page) => page > 1) // Halaman 1 sudah tercakup di atas
-          .map((page) => {
-            // Buat URL mentah
-            const rawUrl = `${baseUrl}/menu?kategori=${encodeURI(
-              category
-            )}&page=${page}`;
-            // Escape karakter '&' secara manual untuk XML
-            const xmlEscapedUrl = rawUrl.replace(/&/g, "&amp;");
-            return {
-              url: xmlEscapedUrl,
-              lastModified: new Date(),
-              changeFrequency: "weekly" as const,
-              priority: 0.6,
-            };
-          }),
-      ];
-
-      return pages;
-    })
-    .flat();
-
-  return [...staticPages, ...menuPages, ...paginationPages, ...categoryPages];
+  // Mengembalikan hanya halaman statis dan detail menu (tanpa pagination dan query)
+  return [...staticPages, ...menuPages, ...categoryPages];
 }
