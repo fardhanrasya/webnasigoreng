@@ -71,7 +71,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       // Buat array halaman untuk kategori ini
       const pages = [
         {
-          url: `${baseUrl}/menu?kategori=${encodeURIComponent(category)}`,
+          url: `${baseUrl}/menu?kategori=${encodeURI(category)}`,
           lastModified: new Date(),
           changeFrequency: "weekly" as const,
           priority: 0.7,
@@ -79,9 +79,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ...Array.from({ length: totalPages }, (_, i) => i + 1)
           .filter((page) => page > 1) // Halaman 1 sudah tercakup di atas
           .map((page) => ({
-            url: `${baseUrl}/menu?kategori=${encodeURIComponent(
-              category
-            )}&page=${page}`,
+            url: `${baseUrl}/menu?kategori=${encodeURI(category)}&page=${page}`,
             lastModified: new Date(),
             changeFrequency: "weekly" as const,
             priority: 0.6,
