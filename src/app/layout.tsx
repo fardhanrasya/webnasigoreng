@@ -5,6 +5,7 @@ import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
 import FloatingLogos from "@/components/FloatingLogos";
 import siteConfig from "./env";
+import WelcomeModalWrapper from "@/components/Layout/WelcomeModalWrapper";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -75,6 +76,7 @@ export default function RootLayout({
           gofoodLink="https://gofood.co.id/restaurant-link"
           shopeefoodLink="https://shopeefood.co.id/restaurant-link"
         />
+        <WelcomeModalWrapper />
       </body>
     </html>
   );
